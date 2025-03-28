@@ -1,13 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="style.css">
-  <title>Guess My Number!</title>
-</head>
-<body>
-  <h1>Guess My Number!</h1>
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+    <title>Guess My Number!</title>
+  </head>
+  <body>
+    <header class="header-container">
+      <section class="header-top">
+        <button class="reset-game-btn">Again!</button>
+        <p class="range-label">(Between 1 and 20)</p>
+      </section>
+      <p class="header-title">Guess My Number!</p>
+      <div class="game-logo">?</div>
+    </header>
+    <main class="content-container">
+      <section class="input-section">
+        <div>
+          <input type="text" class="number-input" />
+        </div>
+        <div>
+          <button class="check-btn">Check!</button>
+        </div>
+      </section>
+      <section class="result-section">
+        <div class="outcome-container">
+          <p class="outcome-label">Start guessing...</p>
+        </div>
+        <div class="scores-container">
+          <p class="score-label">💯 Score: 20</p>
+          <p class="highscore-label">🥇 Highscore: 0</p>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
 </html>
