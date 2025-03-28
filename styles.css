@@ -10,9 +10,13 @@ body {
     color: white;
 }
 
+.game-won {
+    background-color: #60b347;
+}
+
 .header-container {
     padding: 20px;
-    border-bottom: solid 8px red;
+    border-bottom: solid 8px white;
 }
 
 .header-top {
@@ -20,7 +24,7 @@ body {
     justify-content: space-between;
 }
 
-.reset-game-btn, .check-btn {
+.btn {
     padding: 20px;
     background-color: white;
     font-family: "Press Start 2P", sans-serif;
@@ -28,12 +32,16 @@ body {
     border: none;
 }
 
-.reset-game-btn:hover, .check-btn:hover {
+.btn:not(:disabled):hover {
     background-color: #cecccc;
 }
 
-.reset-game-btn:active, .check-btn:active {
+.btn:not(:disabled):active {
     background-color: #908f8f;
+}
+
+.btn:disabled {
+    cursor: not-allowed;
 }
 
 .header-title {
@@ -42,8 +50,8 @@ body {
     text-align: center;
 }
 
-.game-logo {
-    width: 140px;
+.random-number {
+    width: 10rem;
     height: 100px;
     padding: 24px 0px;
     margin: 0px auto;
@@ -54,10 +62,14 @@ body {
     text-align: center;
 }
 
+.random-number-win {
+    width: 15rem;
+}
+
 .content-container {
     display: flex;
     justify-content: space-around;
-    background-color: #232222;
+    /* background-color: #232222; */
     padding: 40px;
 }
 
@@ -73,7 +85,7 @@ body {
     width: 250px;
     height: 130px;
     padding: 20px;
-    background-color: #232222;
+    background-color: transparent;
     color: white;
     font-family: "Press Start 2P", sans-serif;
     font-size: 50px;
@@ -89,7 +101,7 @@ body {
     font-size: 22px;
 }
 
-.outcome-container {
+.message-container {
     margin: 70px 0;
 }
 
