@@ -40,6 +40,35 @@ function setGameWonStyles() {
     .setAttribute("disabled", true);
 }
 
+function gameLogic(inputInt) {
+  if (inputInt > randomInt) {
+    document.querySelector('[data-testid="message"]').textContent =
+      HIGH_GUESS_MESSAGE;
+    score--;
+    document.querySelector('[data-testid="score-value"]').textContent = score;
+  } else if (inputInt < randomInt) {
+    document.querySelector('[data-testid="message"]').textContent =
+      LOW_GUESS_MESSAGE;
+    score--;
+    document.querySelector('[data-testid="score-value"]').textContent = score;
+  } else {
+    document.querySelector('[data-testid="message"]').textContent =
+      CORRECT_GUESS_MESSAGE;
+    highScore += score;
+    document.querySelector('[data-testid="highscore-value"]').textContent =
+      highScore;
+    setGameWonStyles();
+  }
+
+  if (score === 0) {
+    document.querySelector('[data-testid="message"]').textContent =
+      LOST_MESSAGE;
+    document
+      .querySelector('[data-testid="check-btn"]')
+      .setAttribute("disabled", true);
+  }
+}
+
 function onCheckBtnClick() {
   const inputStr = document.querySelector('[data-testid="number-input"]').value;
   const inputInt = parseInt(inputStr);
@@ -54,33 +83,7 @@ function onCheckBtnClick() {
     document.querySelector('[data-testid="message"]').textContent =
       INPUT_OUT_OF_RANGE_WARNING;
   } else {
-    const inputInt = parseInt(inputStr);
-    if (inputInt > randomInt) {
-      document.querySelector('[data-testid="message"]').textContent =
-        HIGH_GUESS_MESSAGE;
-      score--;
-      document.querySelector('[data-testid="score-value"]').textContent = score;
-    } else if (inputInt < randomInt) {
-      document.querySelector('[data-testid="message"]').textContent =
-        LOW_GUESS_MESSAGE;
-      score--;
-      document.querySelector('[data-testid="score-value"]').textContent = score;
-    } else {
-      document.querySelector('[data-testid="message"]').textContent =
-        CORRECT_GUESS_MESSAGE;
-      highScore += score;
-      document.querySelector('[data-testid="highscore-value"]').textContent =
-        highScore;
-      setGameWonStyles();
-    }
-
-    if (score === 0) {
-      document.querySelector('[data-testid="message"]').textContent =
-        LOST_MESSAGE;
-      document
-        .querySelector('[data-testid="check-btn"]')
-        .setAttribute("disabled", true);
-    }
+    gameLogic(inputInt);
   }
 }
 
