@@ -16,9 +16,21 @@ function getRandomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-function removeGameWonStyles() {
+function setRandomNumber(randomNumber) {
   document.querySelector('[data-testid="random-number"]').textContent =
-    RANDOM_NUMBER_PLACEHOLDER;
+    randomNumber;
+}
+
+function setMessage(message) {
+  document.querySelector('[data-testid="message"]').textContent = message;
+}
+
+function setScore(score) {
+  document.querySelector('[data-testid="score-value"]').textContent = score;
+}
+
+function removeGameWonStyles() {
+  setRandomNumber(RANDOM_NUMBER_PLACEHOLDER);
   document.querySelector("body").classList.remove("game-won");
   document
     .querySelector('[data-testid="random-number"]')
@@ -29,8 +41,7 @@ function removeGameWonStyles() {
 }
 
 function setGameWonStyles() {
-  document.querySelector('[data-testid="random-number"]').textContent =
-    randomInt;
+  setRandomNumber(randomInt);
   document.querySelector("body").classList.add("game-won");
   document
     .querySelector('[data-testid="random-number"]')
@@ -40,29 +51,31 @@ function setGameWonStyles() {
     .setAttribute("disabled", true);
 }
 
-function gameLogic(inputInt) {
-  if (inputInt > randomInt) {
-    document.querySelector('[data-testid="message"]').textContent =
-      HIGH_GUESS_MESSAGE;
-    score--;
-    document.querySelector('[data-testid="score-value"]').textContent = score;
-  } else if (inputInt < randomInt) {
-    document.querySelector('[data-testid="message"]').textContent =
-      LOW_GUESS_MESSAGE;
-    score--;
-    document.querySelector('[data-testid="score-value"]').textContent = score;
-  } else {
-    document.querySelector('[data-testid="message"]').textContent =
-      CORRECT_GUESS_MESSAGE;
-    highScore += score;
+function updateHighScore() {
+  if (score > highScore) {
+    highScore = score;
     document.querySelector('[data-testid="highscore-value"]').textContent =
       highScore;
+  }
+}
+
+function gameLogic(inputInt) {
+  if (inputInt > randomInt) {
+    setMessage(HIGH_GUESS_MESSAGE);
+    score--;
+    setScore(score);
+  } else if (inputInt < randomInt) {
+    setMessage(LOW_GUESS_MESSAGE);
+    score--;
+    setScore(score);
+  } else {
+    setMessage(CORRECT_GUESS_MESSAGE);
     setGameWonStyles();
+    updateHighScore();
   }
 
   if (score === 0) {
-    document.querySelector('[data-testid="message"]').textContent =
-      LOST_MESSAGE;
+    setMessage(LOST_MESSAGE);
     document
       .querySelector('[data-testid="check-btn"]')
       .setAttribute("disabled", true);
@@ -74,14 +87,11 @@ function onCheckBtnClick() {
   const inputInt = parseInt(inputStr);
 
   if (inputStr === "") {
-    document.querySelector('[data-testid="message"]').textContent =
-      NO_INPUT_WARNING;
+    setMessage(NO_INPUT_WARNING);
   } else if (inputInt === NaN) {
-    document.querySelector('[data-testid="message"]').textContent =
-      INVALID_INPUT_WARNING;
+    setMessage(INVALID_INPUT_WARNING);
   } else if (inputInt < MIN_LIMIT || inputInt > MAX_LIMIT) {
-    document.querySelector('[data-testid="message"]').textContent =
-      INPUT_OUT_OF_RANGE_WARNING;
+    setMessage(INPUT_OUT_OF_RANGE_WARNING);
   } else {
     gameLogic(inputInt);
   }
@@ -91,8 +101,8 @@ function startGame() {
   randomInt = getRandomInt(MIN_LIMIT, MAX_LIMIT);
   score = 20;
 
-  document.querySelector('[data-testid="score-value"]').textContent = score;
-  document.querySelector('[data-testid="message"]').textContent = INIT_MESSAGE;
+  setScore(score);
+  setMessage(INIT_MESSAGE);
   document.querySelector('[data-testid="number-input"]').value = "";
   removeGameWonStyles();
 }
